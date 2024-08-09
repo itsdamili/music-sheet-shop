@@ -1,4 +1,3 @@
-// pages/_app.js
 import Layout from '../components/Layout';
 
 function MyApp({ Component, pageProps }) {

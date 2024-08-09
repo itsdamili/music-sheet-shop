@@ -1,6 +1,5 @@
-// pages/cart.js
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const CartContainer = styled.div`
   padding: 20px;
@@ -16,7 +15,7 @@ const CartItem = styled.div`
   border-bottom: 1px solid #ddd;
 
   h2 {
-    color: #5b166d;
+    color: #1c1c1b;
   }
 
   p {
@@ -37,17 +36,34 @@ const CartItem = styled.div`
   }
 `;
 
-const productsInCart = [
-  // Example data - ideally, this would come from state management
-  { id: 1, name: 'Clair de Lune', composer: 'Claude Debussy', year: 1890, price: 25 },
-  // Other items
-];
-
 export default function Cart() {
-  const [items, setItems] = useState(productsInCart);
+  const [items, setItems] = useState([]);
+
+  const loadCartItems = () => {
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    setItems(cartItems);
+  };
+
+  useEffect(() => {
+    loadCartItems();
+
+    const handleCartUpdate = () => {
+      loadCartItems();
+    };
+
+    window.addEventListener('cartUpdate', handleCartUpdate);
+
+    return () => {
+      window.removeEventListener('cartUpdate', handleCartUpdate);
+    };
+  }, []);
 
   const removeFromCart = (id) => {
-    setItems(items.filter(item => item.id !== id));
+    const newCartItems = items.filter(item => item.id !== id);
+    setItems(newCartItems);
+    localStorage.setItem('cart', JSON.stringify(newCartItems));
+
+    window.dispatchEvent(new Event('cartUpdate'));
   };
 
   return (

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import styled from '@emotion/styled';
-import Layout from '../components/Layout';
 
 const Form = styled.form`
   display: flex;
@@ -55,7 +54,7 @@ export default function Contact() {
   };
 
   return (
-    <Layout>
+    <div className='container'>
       <h1>Contact Us</h1>
       <Form onSubmit={handleSubmit}>
         <input
@@ -81,6 +80,6 @@ export default function Contact() {
         {error && <p style={{ color: 'red' }}>{error}</p>}
         <button type="submit">Submit</button>
       </Form>
-    </Layout>
+    </div>
   );
 }

@@ -1,10 +1,9 @@
-// components/ProductCard.js
 import styled from '@emotion/styled';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Card = styled.div`
-  border: 1px solid #5b166d;
+  border: 1px solid #186f22;
   border-radius: 8px;
   padding: 16px;
   margin: 16px;
@@ -22,7 +21,7 @@ const Card = styled.div`
   h2 {
     margin: 10px 0;
     font-size: 1.4rem;
-    color: #5b166d;
+    color: #1c1c1b;
   }
 
   p {
@@ -42,18 +41,33 @@ const Card = styled.div`
     &:hover {
       background-color: #ccac00;
     }
-  }
 
-  .remove {
-    background-color: #5b166d;
+    &.remove {
+      background-color: #5b166d;
+    }
   }
 `;
 
-const ProductCard = ({ name, composer, year, price }) => {
+const ProductCard = ({ id, name, composer, year, price }) => {
   const [inCart, setInCart] = useState(false);
 
+  useEffect(() => {
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    setInCart(cartItems.some((item) => item.id === id));
+  }, [id]);
+
   const toggleCart = () => {
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    if (inCart) {
+      const newCartItems = cartItems.filter((item) => item.id !== id);
+      localStorage.setItem('cart', JSON.stringify(newCartItems));
+    } else {
+      const newItem = { id, name, composer, year, price };
+      localStorage.setItem('cart', JSON.stringify([...cartItems, newItem]));
+    }
     setInCart(!inCart);
+
+    window.dispatchEvent(new Event('cartUpdate'));
   };
 
   return (

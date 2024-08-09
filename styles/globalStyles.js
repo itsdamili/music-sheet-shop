@@ -10,8 +10,8 @@ export const globalStyles = css`
 
   body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
-    background-color: #f0f0f5;
-    color: #333;
+    background-color: #fffff5;
+    color: #1c1c1b;
     padding: 20px;
     line-height: 1.6;
   }
@@ -20,7 +20,7 @@ export const globalStyles = css`
     text-align: center;
     margin-bottom: 20px;
     font-size: 2.5rem;
-    color: #222;
+    color: #5b166d;
   }
 
   .container {
@@ -35,8 +35,8 @@ export const globalStyles = css`
   }
 
   nav {
-    background-color: #333;
-    color: #fff;
+    background-color: #1c1c1b;
+    color: #fffff5;
     padding: 10px;
     text-align: center;
     margin-bottom: 20px;
@@ -50,6 +50,6 @@ export const globalStyles = css`
   }
 
   nav a:hover {
-    color: #ff6347;
+    color: #ccac00;
   }
 `;

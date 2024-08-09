@@ -1,14 +1,11 @@
-import Layout from '../components/Layout';
-
 export default function About() {
-  return (
-    <Layout>
-      <h1>About Us</h1>
-      <p>
-        Welcome to Music Sheet Shop! We are passionate about providing high-quality music sheets for classical music enthusiasts. 
-        Our collection includes works from renowned composers like Beethoven, Mozart, and Bach. All our music sheets are transcribed 
-        with precision by Milad Azizi.
-      </p>
-    </Layout>
-  );
-}
+    return (
+      <div className="container">
+        <h1>About Us</h1>
+        <p>
+          Welcome to our Music Sheet Shop. We offer a wide selection of music sheets from various classical composers. Whether you're a beginner or an experienced musician, you'll find something that fits your needs.
+        </p>
+      </div>
+    );
+  }
+  

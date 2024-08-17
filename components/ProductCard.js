@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import PrimaryButton from './buttons/PrimaryButton';
+import RemoveButton from './buttons/RemoveButton';
 
 const Card = styled.div`
   border: 1px solid #186f22;
@@ -26,25 +28,6 @@ const Card = styled.div`
 
   p {
     margin: 5px 0;
-  }
-
-  button {
-    background-color: #186f22;
-    color: #fffff5;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.2s;
-
-    &:hover {
-      background-color: #ccac00;
-    }
-
-    &.remove {
-      background-color: #5b166d;
-    }
   }
 `;
 
@@ -84,12 +67,11 @@ const ProductCard = ({ id, name, composer, year, price }) => {
       <p>Composer: {composer}</p>
       <p>Year: {year}</p>
       <p>Price: ${price}</p>
-      <button
-        className={inCart ? 'remove' : ''}
-        onClick={toggleCart}
-      >
-        {inCart ? 'Remove from Cart' : 'Add to Cart'}
-      </button>
+      {inCart ? (
+        <RemoveButton onClick={toggleCart}>Remove from Cart</RemoveButton>
+      ) : (
+        <PrimaryButton onClick={toggleCart}>Add to Cart</PrimaryButton>
+      )}
     </Card>
   );
 };

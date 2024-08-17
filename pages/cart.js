@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
+import RemoveButton from '../components/buttons/RemoveButton';
 
 const CartContainer = styled.div`
   padding: 20px;
@@ -20,19 +21,6 @@ const CartItem = styled.div`
 
   p {
     color: #1c1c1b;
-  }
-
-  button {
-    background-color: #5b166d;
-    color: #fffff5;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-
-    &:hover {
-      background-color: #ccac00;
-    }
   }
 `;
 
@@ -74,7 +62,7 @@ export default function Cart() {
           <CartItem key={item.id}>
             <h2>{item.name}</h2>
             <p>${item.price}</p>
-            <button onClick={() => removeFromCart(item.id)}>Remove</button>
+            <RemoveButton onClick={() => removeFromCart(item.id)}>Remove</RemoveButton>
           </CartItem>
         ))
       ) : (

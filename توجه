@@ -1,2 +1,3 @@
 npm install
+npx storybook@latest init
 را اجرا کنید

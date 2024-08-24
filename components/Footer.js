@@ -1,24 +1,41 @@
-// components/Footer.js
 import styled from '@emotion/styled';
 
 const FooterContainer = styled.footer`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
   background-color: #1c1c1b;
   color: #fffff5;
-  text-align: center;
   padding: 20px;
+  text-align: center;
+  margin-top: 40px;
   bottom: 0;
   width: 100%;
-  font-size: 1rem;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 `;
 
-export default function Footer() {
+const SocialLinks = styled.div`
+  margin: 10px 0;
+
+  a {
+    color: #ccac00;
+    margin: 0 10px;
+    font-size: 1.2rem;
+  }
+
+  a:hover {
+    color: #ffcc00;
+  }
+`;
+
+const Footer = () => {
   return (
     <FooterContainer>
-      Designed by Milad Azizi
+      <p>&copy; 2024 Sheet Music Shop. All rights reserved.</p>
+      <SocialLinks>
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
+      </SocialLinks>
     </FooterContainer>
   );
-}
+};
+
+export default Footer;

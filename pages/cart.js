@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
-import { useEffect, useState } from 'react';
-import RemoveButton from '../components/buttons/RemoveButton';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeItemFromCart } from '../slices/cartSlice';
+import { useRouter } from 'next/router';
+import PrimaryButton from '../components/buttons/PrimaryButton';
 
 const CartContainer = styled.div`
   padding: 20px;
@@ -22,51 +24,54 @@ const CartItem = styled.div`
   p {
     color: #1c1c1b;
   }
+
+  button {
+    background-color: #ff6347;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s;
+
+    &:hover {
+      transform: scale(1.1);
+      background-color: #e55337;
+    }
+  }
 `;
 
 export default function Cart() {
-  const [items, setItems] = useState([]);
+  const items = useSelector((state) => state.cart.items);
+  const dispatch = useDispatch();
+  const router = useRouter();
 
-  const loadCartItems = () => {
-    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-    setItems(cartItems);
+  const handleRemove = (id) => {
+    dispatch(removeItemFromCart(id));
   };
 
-  useEffect(() => {
-    loadCartItems();
-
-    const handleCartUpdate = () => {
-      loadCartItems();
-    };
-
-    window.addEventListener('cartUpdate', handleCartUpdate);
-
-    return () => {
-      window.removeEventListener('cartUpdate', handleCartUpdate);
-    };
-  }, []);
-
-  const removeFromCart = (id) => {
-    const newCartItems = items.filter(item => item.id !== id);
-    setItems(newCartItems);
-    localStorage.setItem('cart', JSON.stringify(newCartItems));
-
-    window.dispatchEvent(new Event('cartUpdate'));
+  const handleProceedToCheckout = () => {
+    router.push('/checkout');
   };
 
   return (
     <CartContainer>
       <h1>Your Cart</h1>
       {items.length > 0 ? (
-        items.map(item => (
+        items.map((item) => (
           <CartItem key={item.id}>
             <h2>{item.name}</h2>
             <p>${item.price}</p>
-            <RemoveButton onClick={() => removeFromCart(item.id)}>Remove</RemoveButton>
+            <button onClick={() => handleRemove(item.id)}>Remove</button>
           </CartItem>
         ))
       ) : (
         <p>Your cart is empty.</p>
+      )}
+      {items.length > 0 && (
+        <PrimaryButton onClick={handleProceedToCheckout}>
+          Proceed to Checkout
+        </PrimaryButton>
       )}
     </CartContainer>
   );

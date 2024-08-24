@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from '@emotion/styled';
-import TextInput from '../components/inputs/TextInput';
+import { useRouter } from 'next/router';
 import PrimaryButton from '../components/buttons/PrimaryButton';
 
 const Form = styled.form`
@@ -11,13 +11,14 @@ const Form = styled.form`
   margin: 0 auto;
 `;
 
-export default function Contact() {
+export default function Checkout() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
-    message: ''
+    address: '',
+    zipCode: '',
+    mobileNumber: ''
   });
-
   const [error, setError] = useState('');
 
   const handleChange = (e) => {
@@ -29,48 +30,47 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (!formData.email.includes('@')) {
-      setError('Please enter a valid email address');
-      return;
-    }
-    if (formData.name === '' || formData.message === '') {
+    if (!formData.name || !formData.address || !formData.zipCode || !formData.mobileNumber) {
       setError('Please fill out all fields');
       return;
     }
-
-    console.log('Form submitted', formData); // Placeholder for real submission
     setError('');
-    alert('Thank you for your message! We will get back to you shortly.'); // Confirmation message
+    router.push('/payment');
   };
 
   return (
     <div className='container'>
-      <h1>Contact Us</h1>
+      <h1>Delivery Information</h1>
       <Form onSubmit={handleSubmit}>
-        <TextInput
+        <input
           type="text"
           name="name"
-          placeholder="Your Name"
+          placeholder="Name"
           value={formData.name}
           onChange={handleChange}
         />
-        <TextInput
-          type="email"
-          name="email"
-          placeholder="Your Email"
-          value={formData.email}
+        <input
+          type="text"
+          name="address"
+          placeholder="Address"
+          value={formData.address}
           onChange={handleChange}
         />
-        <TextInput
-          as="textarea"
-          name="message"
-          placeholder="Your Message"
-          rows="5"
-          value={formData.message}
+        <input
+          type="text"
+          name="zipCode"
+          placeholder="Zip Code"
+          value={formData.zipCode}
           onChange={handleChange}
         />
-        <PrimaryButton type="submit">Send Message</PrimaryButton>
+        <input
+          type="text"
+          name="mobileNumber"
+          placeholder="Mobile Number"
+          value={formData.mobileNumber}
+          onChange={handleChange}
+        />
+        <PrimaryButton type="submit">Continue to Payment</PrimaryButton>
         {error && <p style={{ color: 'red' }}>{error}</p>}
       </Form>
     </div>

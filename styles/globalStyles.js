@@ -1,4 +1,3 @@
-// styles/globalStyles.js
 import { css } from '@emotion/react';
 
 export const globalStyles = css`
@@ -41,6 +40,9 @@ export const globalStyles = css`
     text-align: center;
     margin-bottom: 20px;
     border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   nav a {

@@ -1,77 +1,63 @@
+import { useDispatch } from 'react-redux';
+import { addItemToCart } from '../slices/cartSlice';
 import styled from '@emotion/styled';
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import PrimaryButton from './buttons/PrimaryButton';
-import RemoveButton from './buttons/RemoveButton';
+import { useState } from 'react';
 
 const Card = styled.div`
-  border: 1px solid #186f22;
+  border: 1px solid #ddd;
+  padding: 20px;
   border-radius: 8px;
-  padding: 16px;
-  margin: 16px;
-  background-color: #fffff5;
-  transition: transform 0.2s, box-shadow 0.2s;
-  width: 100%;
-  max-width: 300px;
   text-align: center;
+  transition: transform 0.2s;
+  background-color: #f9f9f9;
 
   &:hover {
     transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
+`;
 
-  h2 {
-    margin: 10px 0;
-    font-size: 1.4rem;
-    color: #1c1c1b;
-  }
+const ProductName = styled.h2`
+  color: #5b166d;
+`;
 
-  p {
-    margin: 5px 0;
+const ProductInfo = styled.p`
+  color: #333;
+`;
+
+const Button = styled.button`
+  background-color: ${({ added }) => (added ? '#ccac00' : '#1c1c1b')};
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: ${({ added }) => (added ? '#ccac00' : '#333')};
   }
 `;
 
 const ProductCard = ({ id, name, composer, year, price }) => {
-  const [inCart, setInCart] = useState(false);
+  const dispatch = useDispatch();
+  const [added, setAdded] = useState(false);
 
-  useEffect(() => {
-    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-    setInCart(cartItems.some((item) => item.id === id));
-  }, [id]);
-
-  const toggleCart = () => {
-    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-    if (inCart) {
-      const newCartItems = cartItems.filter((item) => item.id !== id);
-      localStorage.setItem('cart', JSON.stringify(newCartItems));
-    } else {
-      const newItem = { id, name, composer, year, price };
-      localStorage.setItem('cart', JSON.stringify([...cartItems, newItem]));
-    }
-    setInCart(!inCart);
-
-    window.dispatchEvent(new Event('cartUpdate'));
+  const handleAddToCart = () => {
+    dispatch(addItemToCart({ id, name, composer, year, price }));
+    setAdded(true);
   };
 
   return (
     <Card>
-      <Image
-        src="/images/music-sheet.jpg"
-        alt={name}
-        width={250}
-        height={350}
-        placeholder="blur"
-        blurDataURL="/images/music-sheet.jpg"
-      />
-      <h2>{name}</h2>
-      <p>Composer: {composer}</p>
-      <p>Year: {year}</p>
-      <p>Price: ${price}</p>
-      {inCart ? (
-        <RemoveButton onClick={toggleCart}>Remove from Cart</RemoveButton>
-      ) : (
-        <PrimaryButton onClick={toggleCart}>Add to Cart</PrimaryButton>
-      )}
+      <ProductName>{name}</ProductName>
+      <ProductInfo>Composer: {composer}</ProductInfo>
+      <ProductInfo>Year: {year}</ProductInfo>
+      <ProductInfo>Price: ${price}</ProductInfo>
+      <Button added={added} onClick={handleAddToCart}>
+        {added ? 'Added' : 'Add to Cart'}
+      </Button>
     </Card>
   );
 };

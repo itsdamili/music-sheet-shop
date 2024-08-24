@@ -1,20 +1,23 @@
 import styled from '@emotion/styled';
 
-const Button = styled.button`
-  background-color: #186f22;
-  color: #fffff5;
-  padding: 10px 15px;
+const PrimaryButton = styled.button`
+  background-color: #007bff;
+  color: white;
   border: none;
-  border-radius: 4px;
+  padding: 10px 20px;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.2s;
+  transition: background-color 0.3s, transform 0.3s;
 
   &:hover {
-    background-color: #ccac00;
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+
+  &:disabled {
+    background-color: #d3d3d3;
+    cursor: not-allowed;
   }
 `;
 
-export default function PrimaryButton({ children, onClick }) {
-  return <Button onClick={onClick}>{children}</Button>;
-}
+export default PrimaryButton;

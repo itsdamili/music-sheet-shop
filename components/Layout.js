@@ -1,19 +1,13 @@
+import Navbar from './Navbar';
 import { Global } from '@emotion/react';
 import { globalStyles } from '../styles/globalStyles';
-import Header from './Header';
-import Footer from './Footer';
 
-const Layout = ({ children }) => {
+export default function Layout({ children }) {
   return (
     <>
       <Global styles={globalStyles} />
-      <Header />
-      <div className="container">
-        {children}
-        <Footer />
-      </div>
+      <Navbar />
+      <main className="container">{children}</main>
     </>
   );
-};
-
-export default Layout;
+}

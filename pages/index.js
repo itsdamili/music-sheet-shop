@@ -1,3 +1,4 @@
+import React from 'react';
 import ProductCard from '../components/ProductCard';
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';

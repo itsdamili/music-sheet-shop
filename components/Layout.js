@@ -1,3 +1,4 @@
+import React from 'react'; 
 import Navbar from './Navbar';
 import { Global } from '@emotion/react';
 import { globalStyles } from '../styles/globalStyles';

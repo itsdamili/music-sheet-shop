@@ -1,3 +1,4 @@
+// pages/cart.js
 import React from 'react';
 import styled from '@emotion/styled';
 import { useSelector, useDispatch } from 'react-redux';
@@ -7,15 +8,15 @@ import PrimaryButton from '../components/buttons/PrimaryButton';
 
 const CartContainer = styled.div`
   padding: 20px;
+  background-color: #f9f9f9;
   color: #1c1c1b;
-  background-color: #fffff5;
 `;
 
 const CartItem = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 15px;
   border-bottom: 1px solid #ddd;
 
   h2 {
@@ -33,13 +34,21 @@ const CartItem = styled.div`
     padding: 8px 16px;
     border-radius: 5px;
     cursor: pointer;
-    transition: transform 0.3s;
+    transition: background-color 0.3s;
 
     &:hover {
-      transform: scale(1.1);
       background-color: #e55337;
     }
   }
+`;
+
+const EmptyCartMessage = styled.p`
+  text-align: center;
+  color: #1c1c1b;
+`;
+
+const CheckoutButton = styled(PrimaryButton)`
+  margin-top: 20px;
 `;
 
 export default function Cart() {
@@ -67,12 +76,12 @@ export default function Cart() {
           </CartItem>
         ))
       ) : (
-        <p>Your cart is empty.</p>
+        <EmptyCartMessage>Your cart is empty.</EmptyCartMessage>
       )}
       {items.length > 0 && (
-        <PrimaryButton onClick={handleProceedToCheckout}>
+        <CheckoutButton onClick={handleProceedToCheckout}>
           Proceed to Checkout
-        </PrimaryButton>
+        </CheckoutButton>
       )}
     </CartContainer>
   );

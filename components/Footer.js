@@ -1,3 +1,5 @@
+// components/Footer.js
+import React from 'react';
 import styled from '@emotion/styled';
 
 const FooterContainer = styled.footer`
@@ -5,9 +7,6 @@ const FooterContainer = styled.footer`
   color: #fffff5;
   padding: 20px;
   text-align: center;
-  margin-top: 40px;
-  bottom: 0;
-  width: 100%;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 `;
 
@@ -17,7 +16,8 @@ const SocialLinks = styled.div`
   a {
     color: #ccac00;
     margin: 0 10px;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    text-decoration: none;
   }
 
   a:hover {
@@ -29,11 +29,6 @@ const Footer = () => {
   return (
     <FooterContainer>
       <p>&copy; 2024 Sheet Music Shop. All rights reserved.</p>
-      <SocialLinks>
-        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a>
-        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
-        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
-      </SocialLinks>
     </FooterContainer>
   );
 };

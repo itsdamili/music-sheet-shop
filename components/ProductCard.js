@@ -1,7 +1,7 @@
-import { useDispatch } from 'react-redux';
-import { addItemToCart } from '../slices/cartSlice';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addItemToCart, removeItemFromCart } from '../slices/cartSlice';
 import styled from '@emotion/styled';
-import { useState } from 'react';
 
 const Card = styled.div`
   border: 1px solid #ddd;
@@ -42,11 +42,22 @@ const Button = styled.button`
 
 const ProductCard = ({ id, name, composer, year, price }) => {
   const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.items);
   const [added, setAdded] = useState(false);
 
+  // Check if the item is in the cart
+  useEffect(() => {
+    const itemInCart = cartItems.some((item) => item.id === id);
+    setAdded(itemInCart);
+  }, [cartItems, id]);
+
   const handleAddToCart = () => {
-    dispatch(addItemToCart({ id, name, composer, year, price }));
-    setAdded(true);
+    if (added) {
+      dispatch(removeItemFromCart(id));
+    } else {
+      dispatch(addItemToCart({ id, name, composer, year, price }));
+    }
+    setAdded(!added); // Toggle button state
   };
 
   return (

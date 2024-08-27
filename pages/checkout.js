@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 import PrimaryButton from '../components/buttons/PrimaryButton';
 
-// Styled components
 const Container = styled.div`
   display: flex;
   flex-direction: column;

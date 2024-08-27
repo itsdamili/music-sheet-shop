@@ -1,4 +1,3 @@
-// pages/signup.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
@@ -15,7 +14,6 @@ const Signup = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
 
-    // Check if all fields are filled out
     if (!username || !password || !email) {
       setMessage('Please fill in all fields.');
       return;
@@ -29,11 +27,9 @@ const Signup = () => {
       });
 
       if (response.status === 201) {
-        // Automatically log the user in
-        cookies.set('user', response.data, { path: '/' }); // Save user in cookies
+        cookies.set('user', response.data, { path: '/' });
         setMessage(`User ${response.data.username} created successfully!`);
         
-        // Redirect to home page
         router.push('/');
       } else {
         setMessage('Failed to create user.');

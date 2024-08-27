@@ -45,7 +45,6 @@ const ProductCard = ({ id, name, composer, year, price }) => {
   const cartItems = useSelector((state) => state.cart.items);
   const [added, setAdded] = useState(false);
 
-  // Check if the item is in the cart
   useEffect(() => {
     const itemInCart = cartItems.some((item) => item.id === id);
     setAdded(itemInCart);
@@ -57,7 +56,7 @@ const ProductCard = ({ id, name, composer, year, price }) => {
     } else {
       dispatch(addItemToCart({ id, name, composer, year, price }));
     }
-    setAdded(!added); // Toggle button state
+    setAdded(!added);
   };
 
   return (

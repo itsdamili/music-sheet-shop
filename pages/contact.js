@@ -40,9 +40,9 @@ export default function Contact() {
       return;
     }
 
-    console.log('Form submitted', formData); // Placeholder for real submission
+    console.log('Form submitted', formData);
     setError('');
-    alert('Thank you for your message! We will get back to you shortly.'); // Confirmation message
+    alert('Thank you for your message! We will get back to you shortly.');
   };
 
   return (

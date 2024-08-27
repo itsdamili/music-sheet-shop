@@ -1,4 +1,3 @@
-// pages/delivery.js
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { useDispatch } from 'react-redux';

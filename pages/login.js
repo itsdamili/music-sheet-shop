@@ -1,4 +1,3 @@
-// pages/login.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
@@ -14,7 +13,6 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    // Check if all fields are filled out
     if (!username || !password) {
       setMessage('Please fill in all fields.');
       return;
@@ -28,9 +26,8 @@ const Login = () => {
 
       if (user) {
         setMessage(`Welcome, ${user.username}!`);
-        cookies.set('user', user, { path: '/' }); // Save user in cookies
+        cookies.set('user', user, { path: '/' });
 
-        // Redirect to home page
         router.push('/');
       } else {
         setMessage('Invalid username or password');

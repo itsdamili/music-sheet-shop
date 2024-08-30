@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { useRouter } from 'next/router';
+import PrimaryButton from '../components/buttons/PrimaryButton';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -39,7 +40,7 @@ const Login = () => {
 
   return (
     <div style={{ padding: '20px', maxWidth: '400px', margin: 'auto', textAlign: 'center' }}>
-      <h2>Login</h2>
+      <h1>Login</h1>
       <form onSubmit={handleLogin}>
         <input
           type="text"
@@ -55,9 +56,8 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           style={{ width: '100%', padding: '8px', marginBottom: '10px' }}
         />
-        <button type="submit" style={{ padding: '10px 20px', backgroundColor: '#2196F3', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
-          Login
-        </button>
+        <PrimaryButton type="submit">Login</PrimaryButton>
+
       </form>
       {message && <p>{message}</p>}
     </div>

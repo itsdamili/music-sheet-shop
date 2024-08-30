@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { useRouter } from 'next/router';
+import PrimaryButton from '../components/buttons/PrimaryButton';
 
 const Signup = () => {
   const [username, setUsername] = useState('');
@@ -42,7 +43,7 @@ const Signup = () => {
 
   return (
     <div style={{ padding: '20px', maxWidth: '400px', margin: 'auto', textAlign: 'center' }}>
-      <h2>Sign Up</h2>
+      <h1>Sign Up</h1>
       <form onSubmit={handleSignup}>
         <input
           type="text"
@@ -65,9 +66,7 @@ const Signup = () => {
           onChange={(e) => setEmail(e.target.value)}
           style={{ width: '100%', padding: '8px', marginBottom: '10px' }}
         />
-        <button type="submit" style={{ padding: '10px 20px', backgroundColor: '#4CAF50', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
-          Sign Up
-        </button>
+        <PrimaryButton type="submit">Sign Up</PrimaryButton>
       </form>
       {message && <p>{message}</p>}
     </div>

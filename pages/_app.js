@@ -1,20 +1,24 @@
-import React from 'react'; 
-import { store } from '../store/store';
+import React from 'react';
 import { Provider } from 'react-redux';
+import { Global } from '@emotion/react';
+import { ApolloProvider } from '@apollo/client';
+import { store } from '../store/store';
 import { globalStyles } from '../styles/globalStyles';
 import Layout from '../components/Layout';
 import Footer from '../components/Footer';
-import { Global } from '@emotion/react';
+import client from '../apolloClient';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Provider store={store}>
-      <Global styles={globalStyles} />
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-      <Footer />
-    </Provider>
+    <ApolloProvider client={client}>
+      <Provider store={store}>
+        <Global styles={globalStyles} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+        <Footer />
+      </Provider>
+    </ApolloProvider>
   );
 }
 

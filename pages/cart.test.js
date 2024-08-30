@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { store } from '../store/store';
-import Cart from '../pages/cart';
+import Cart from './cart';
 import { addItemToCart, removeItemFromCart } from '../slices/cartSlice';
 
 jest.mock('next/router', () => ({

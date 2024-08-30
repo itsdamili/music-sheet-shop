@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { Global } from '@emotion/react';
-import { globalStyles } from '../styles/globalStyles';
+import { globalStyles } from './globalStyles';
 
 describe('Global Styles', () => {
   it('should apply global styles correctly', () => {

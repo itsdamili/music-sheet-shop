@@ -1,4 +1,4 @@
-import { store } from '../store/store';
+import { store } from './store';
 import { addItemToCart, removeItemFromCart } from '../slices/cartSlice';
 
 describe('Redux Store', () => {
